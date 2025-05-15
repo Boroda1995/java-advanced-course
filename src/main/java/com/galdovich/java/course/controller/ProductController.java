@@ -1,7 +1,9 @@
 package com.galdovich.java.course.controller;
 
 import com.galdovich.java.course.entity.Product;
+import com.galdovich.java.course.prometheus.CustomMetrics;
 import com.galdovich.java.course.service.ProductService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,16 +18,15 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/products")
+@RequiredArgsConstructor
 public class ProductController {
 
     private final ProductService productService;
-
-    public ProductController(ProductService productService) {
-        this.productService = productService;
-    }
+    private final CustomMetrics customMetrics;
 
     @GetMapping
     public List<Product> getAllProducts() {
+        customMetrics.incrementCustomCounter();
         return productService.findAll();
     }
 

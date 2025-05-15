@@ -19,6 +19,7 @@ public class SecurityConfig {
 
     private final OAuth2LoginSuccessHandler successHandler;
     private final JwtRequestFilter jwtFilter;
+    private static final String[] MATCHERS_ACTUATOR = {"/management/actuator", "/management/actuator/**"};
 
     @Bean
     @ConditionalOnProperty(value = "spring.security.enabled", havingValue = "true")
@@ -29,6 +30,7 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/", "/login").permitAll()
                 .requestMatchers("/admin/**").hasRole("ADMIN")
+                .requestMatchers(MATCHERS_ACTUATOR).hasRole("ADMIN")
                 .requestMatchers("/api/v1/customers/**").hasRole("USER")
                 .requestMatchers("/api/v1/products/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
