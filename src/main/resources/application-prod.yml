@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5433/tree
+  jpa:
+    show-sql: false
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            redirect-uri: "http://custom-prod-url:8080/login/oauth2/code/google"
