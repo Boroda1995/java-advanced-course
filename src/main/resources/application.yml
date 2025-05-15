@@ -1,0 +1,45 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/tree
+    username: ${POSTGRES_USER_NAME}
+    password: ${POSTGRES_USER_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.xml
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+  security:
+    jwt:
+      secret: ${KEY_SECRET}
+    enabled: true
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${CLIENT_ID}
+            client-secret: ${CLIENT_SECRET}
+            scope:
+              - openid
+              - profile
+              - email
+            redirect-uri: "http://localhost:8080/login/oauth2/code/google"
+            client-name: Google
+
+management:
+  info:
+    defaults.enabled: true
+  endpoint:
+    health:
+      show-details: ALWAYS
+    loggers.enabled: true
+    prometheus.enabled: true
+  endpoints:
+    web:
+      base-path: /management/actuator/
+      exposure:
+        include:
+          - health
+          - info
+          - prometheus
