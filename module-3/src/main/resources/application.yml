@@ -1,0 +1,15 @@
+spring:
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/tree
+    username: postgres
+    password: postgres
+
+logging:
+  level:
+    org.springframework.web.reactive.function.client: DEBUG
+
+client:
+  rakuten:
+    appId: 1091562901775589389
+    genreId: 555000
+    keyword: sport
