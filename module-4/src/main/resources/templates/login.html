@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login</title>
+</head>
+<body>
+<h1>Login</h1>
+
+<div th:if="${error}">
+    <p style="color: red">Invalid email or password</p>
+    <p th:if="${remaining}">
+        Remaining attempts: <span th:text="${remaining}"></span>
+    </p>
+</div>
+
+<div th:if="${blocked}">
+    <p style="color: red">Account temporarily blocked. Try again in 5 minutes.</p>
+</div>
+
+<div th:if="${logout}">
+    <p style="color: green">You have been logged out successfully.</p>
+</div>
+
+<form th:action="@{/login}" method="post">
+    <div>
+        <label>Email:</label>
+        <input type="text" name="username" required/>
+    </div>
+    <div>
+        <label>Password:</label>
+        <input type="password" name="password" required/>
+    </div>
+    <button type="submit">Login</button>
+</form>
+
+<p>Don't have an account? <a th:href="@{/register}">Register here</a></p>
+</body>
+</html>

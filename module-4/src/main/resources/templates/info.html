@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Application Info</title>
+</head>
+<body>
+<h1>Application Configuration</h1>
+<div>
+    <p><strong>Description:</strong> <span th:text="${appDescription}"></span></p>
+    <p><strong>Version:</strong> <span th:text="${appVersion}"></span></p>
+    <p><strong>OpenAPI:</strong> <span th:text="${openapiInfo}"></span></p>
+</div>
+</body>
+</html>
